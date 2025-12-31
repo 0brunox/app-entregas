@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
-<head>
+<html lang="pt-BR"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sabor Express - Delivery</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
     <style>
         /* ========== RESET E VARIÁVEIS ========== */
         * {
@@ -1448,11 +1447,11 @@
 </head>
 <body>
     <!-- BOTÃO ADMIN FLUTUANTE (OCULTO POR PADRÃO) -->
-    <button class="admin-fab" id="adminFab" title="Painel de Administração">⚙️</button>
+    <button class="admin-fab visible" id="adminFab" title="Painel de Administração">⚙️</button>
     <div class="admin-shortcut-hint" id="adminHint">Pressione Ctrl+Shift+A</div>
 
     <!-- BOTÃO WHATSAPP FLUTUANTE -->
-    <a href="#" class="whatsapp-fab" id="whatsappFab" target="_blank" title="Fale conosco no WhatsApp">💬</a>
+    <a href="https://wa.me/5521999999999" class="whatsapp-fab" id="whatsappFab" target="_blank" title="Fale conosco no WhatsApp">💬</a>
 
     <!-- MODAL DE SENHA ADMIN -->
     <div class="password-modal" id="passwordModal">
@@ -1460,14 +1459,7 @@
             <h3 class="password-modal-title">🔒 Acesso Restrito</h3>
             <p class="password-modal-subtitle">Digite a senha de administrador</p>
             <form id="passwordForm">
-                <input 
-                    type="password" 
-                    class="password-input" 
-                    id="passwordInput" 
-                    placeholder="****"
-                    maxlength="20"
-                    autocomplete="off"
-                >
+                <input type="password" class="password-input" id="passwordInput" placeholder="****" maxlength="20" autocomplete="off">
                 <div class="password-error" id="passwordError">❌ Senha incorreta!</div>
                 <div class="password-buttons">
                     <button type="button" class="btn-password btn-password-cancel" id="passwordCancel">
@@ -1486,8 +1478,8 @@
     </div>
 
     <!-- PAINEL ADMIN -->
-    <div class="admin-overlay" id="adminOverlay"></div>
-    <aside class="admin-panel" id="adminPanel">
+    <div class="admin-overlay active" id="adminOverlay"></div>
+    <aside class="admin-panel active" id="adminPanel">
         <div class="admin-header">
             <h2>⚙️ Painel de Administração</h2>
             <button class="admin-close" id="adminClose">✕</button>
@@ -1529,7 +1521,7 @@
                 <div class="form-group">
                     <div class="form-switch">
                         <label class="switch">
-                            <input type="checkbox" id="storeStatus" checked>
+                            <input type="checkbox" id="storeStatus" checked="">
                             <span class="slider"></span>
                         </label>
                         <span class="switch-label">Loja Aberta</span>
@@ -1558,8 +1550,120 @@
                 <button class="btn-admin btn-primary-admin" id="addProductBtn" style="margin-bottom: 1.5rem;">➕ Adicionar Novo Produto</button>
                 
                 <div class="product-admin-list" id="productAdminList">
-                    <!-- Produtos serão listados aqui -->
+                <div class="product-admin-item ">
+                    <div class="product-admin-info">
+                        <h4>Pizza Margherita</h4>
+                        <p>Molho de tomate, mussarela, manjericão fresco e az...</p>
+                        <div class="product-admin-price">R$ 42,90</div>
+                    </div>
+                    <div class="product-admin-actions">
+                        <button class="btn-icon btn-toggle" onclick="toggleProductAvailability(1)" title="Desabilitar">
+                            👁️
+                        </button>
+                        <button class="btn-icon btn-edit" onclick="editProduct(1)" title="Editar">
+                            ✏️
+                        </button>
+                        <button class="btn-icon btn-delete" onclick="deleteProduct(1)" title="Excluir">
+                            🗑️
+                        </button>
+                    </div>
                 </div>
+            
+                <div class="product-admin-item ">
+                    <div class="product-admin-info">
+                        <h4>Pizza Calabresa</h4>
+                        <p>Calabresa fatiada, cebola, mussarela e azeitonas...</p>
+                        <div class="product-admin-price">R$ 45,90</div>
+                    </div>
+                    <div class="product-admin-actions">
+                        <button class="btn-icon btn-toggle" onclick="toggleProductAvailability(2)" title="Desabilitar">
+                            👁️
+                        </button>
+                        <button class="btn-icon btn-edit" onclick="editProduct(2)" title="Editar">
+                            ✏️
+                        </button>
+                        <button class="btn-icon btn-delete" onclick="deleteProduct(2)" title="Excluir">
+                            🗑️
+                        </button>
+                    </div>
+                </div>
+            
+                <div class="product-admin-item ">
+                    <div class="product-admin-info">
+                        <h4>Pizza Portuguesa</h4>
+                        <p>Presunto, ovos, cebola, azeitonas e mussarela...</p>
+                        <div class="product-admin-price">R$ 48,90</div>
+                    </div>
+                    <div class="product-admin-actions">
+                        <button class="btn-icon btn-toggle" onclick="toggleProductAvailability(3)" title="Desabilitar">
+                            👁️
+                        </button>
+                        <button class="btn-icon btn-edit" onclick="editProduct(3)" title="Editar">
+                            ✏️
+                        </button>
+                        <button class="btn-icon btn-delete" onclick="deleteProduct(3)" title="Excluir">
+                            🗑️
+                        </button>
+                    </div>
+                </div>
+            
+                <div class="product-admin-item ">
+                    <div class="product-admin-info">
+                        <h4>Pizza Quatro Queijos</h4>
+                        <p>Mussarela, provolone, gorgonzola e parmesão...</p>
+                        <div class="product-admin-price">R$ 52,90</div>
+                    </div>
+                    <div class="product-admin-actions">
+                        <button class="btn-icon btn-toggle" onclick="toggleProductAvailability(4)" title="Desabilitar">
+                            👁️
+                        </button>
+                        <button class="btn-icon btn-edit" onclick="editProduct(4)" title="Editar">
+                            ✏️
+                        </button>
+                        <button class="btn-icon btn-delete" onclick="deleteProduct(4)" title="Excluir">
+                            🗑️
+                        </button>
+                    </div>
+                </div>
+            
+                <div class="product-admin-item ">
+                    <div class="product-admin-info">
+                        <h4>Hambúrguer Artesanal</h4>
+                        <p>Blend 180g, queijo cheddar, bacon e molho especial...</p>
+                        <div class="product-admin-price">R$ 32,90</div>
+                    </div>
+                    <div class="product-admin-actions">
+                        <button class="btn-icon btn-toggle" onclick="toggleProductAvailability(5)" title="Desabilitar">
+                            👁️
+                        </button>
+                        <button class="btn-icon btn-edit" onclick="editProduct(5)" title="Editar">
+                            ✏️
+                        </button>
+                        <button class="btn-icon btn-delete" onclick="deleteProduct(5)" title="Excluir">
+                            🗑️
+                        </button>
+                    </div>
+                </div>
+            
+                <div class="product-admin-item ">
+                    <div class="product-admin-info">
+                        <h4>Batata Frita Premium</h4>
+                        <p>Batatas rústicas com queijo, bacon e cebola carame...</p>
+                        <div class="product-admin-price">R$ 24,90</div>
+                    </div>
+                    <div class="product-admin-actions">
+                        <button class="btn-icon btn-toggle" onclick="toggleProductAvailability(6)" title="Desabilitar">
+                            👁️
+                        </button>
+                        <button class="btn-icon btn-edit" onclick="editProduct(6)" title="Editar">
+                            ✏️
+                        </button>
+                        <button class="btn-icon btn-delete" onclick="deleteProduct(6)" title="Excluir">
+                            🗑️
+                        </button>
+                    </div>
+                </div>
+            </div>
             </div>
         </div>
     </aside>
@@ -1577,29 +1681,29 @@
                 
                 <div class="form-group">
                     <label class="form-label">Nome do Produto *</label>
-                    <input type="text" class="form-input" id="productName" required>
+                    <input type="text" class="form-input" id="productName" required="">
                 </div>
                 
                 <div class="form-group">
                     <label class="form-label">Descrição *</label>
-                    <textarea class="form-input form-textarea" id="productDescription" required></textarea>
+                    <textarea class="form-input form-textarea" id="productDescription" required=""></textarea>
                 </div>
                 
                 <div class="form-group">
                     <label class="form-label">Preço (R$) *</label>
-                    <input type="number" class="form-input" id="productPrice" step="0.01" min="0" required>
+                    <input type="number" class="form-input" id="productPrice" step="0.01" min="0" required="">
                 </div>
                 
                 <div class="form-group">
                     <label class="form-label">URL da Imagem *</label>
-                    <input type="url" class="form-input" id="productImage" required>
+                    <input type="url" class="form-input" id="productImage" required="">
                     <small style="color: var(--gray-600); font-size: 0.75rem; margin-top: 0.25rem; display: block;">Cole o link de uma imagem (ex: do Unsplash, Imgur, etc)</small>
                 </div>
                 
                 <div class="form-group">
                     <div class="form-switch">
                         <label class="switch">
-                            <input type="checkbox" id="productAvailable" checked>
+                            <input type="checkbox" id="productAvailable" checked="">
                             <span class="slider"></span>
                         </label>
                         <span class="switch-label">Produto Disponível</span>
@@ -1615,8 +1719,8 @@
     <header class="header">
         <div class="header-container">
             <a href="#" class="logo">
-                <div class="logo-icon" id="logoIcon">🍕</div>
-                <span id="headerRestaurantName">Sabor Express</span>
+                <div class="logo-icon" id="logoIcon" style="background: linear-gradient(135deg, var(--primary), var(--secondary));">🍕</div>
+                <span id="headerRestaurantName">Kaoana Pizzas</span>
             </a>
             
             <nav class="nav">
@@ -1627,7 +1731,7 @@
             <div class="header-actions">
                 <button class="cart-btn" id="cartBtn">
                     🛒
-                    <span class="cart-count" id="cartCount">0</span>
+                    <span class="cart-count" id="cartCount" style="display: flex;">1</span>
                 </button>
                 <button class="btn-login">Entrar</button>
             </div>
@@ -1638,10 +1742,10 @@
     <section class="hero" id="inicio">
         <div class="hero-container">
             <div class="hero-content">
-                <h1 id="heroRestaurantName">Sabor Express</h1>
+                <h1 id="heroRestaurantName">Kaoana Pizzas</h1>
                 <p class="hero-subtitle" id="heroSubtitle">Delivery rápido e sabor inigualável! Peça agora e receba em até 30 minutos.</p>
                 
-                <div class="status-badge" id="statusBadge">
+                <div class="status-badge status-open" id="statusBadge">
                     <span class="status-dot"></span>
                     <span id="statusText">Aberto Agora</span>
                 </div>
@@ -1650,15 +1754,18 @@
                     <a href="#cardapio" class="btn btn-primary">
                         📋 Ver Cardápio
                     </a>
-                    <a href="#" id="whatsappBtn" target="_blank" class="btn btn-whatsapp">
+                    <a href="https://wa.me/5521999999999" id="whatsappBtn" target="_blank" class="btn btn-whatsapp">
                         💬 WhatsApp
                     </a>
                 </div>
             </div>
             
             <div class="hero-card" id="heroCard">
-                <!-- Card destacado será inserido dinamicamente -->
-            </div>
+                    <img src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=400&amp;h=300&amp;fit=crop" alt="Pizza Margherita">
+                    <h3>Pizza Margherita</h3>
+                    <p>Molho de tomate, mussarela, manjericão fresco e azeite</p>
+                    <div class="hero-card-price">R$ 42,90</div>
+                </div>
         </div>
     </section>
 
@@ -1669,7 +1776,95 @@
             <p class="section-subtitle">Escolha seus pratos favoritos</p>
             
             <div class="products-grid" id="productsGrid">
-                <!-- Produtos serão inseridos via JavaScript -->
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=400&amp;h=300&amp;fit=crop" alt="Pizza Margherita" class="product-image">
+                    
+                    <div class="product-info">
+                        <h3 class="product-name">Pizza Margherita</h3>
+                        <p class="product-description">Molho de tomate, mussarela, manjericão fresco e azeite</p>
+                        <div class="product-footer">
+                            <span class="product-price">R$ 42,90</span>
+                            <button class="btn-add-cart" onclick="addToCart(1)">
+                                + Adicionar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400&amp;h=300&amp;fit=crop" alt="Pizza Calabresa" class="product-image">
+                    
+                    <div class="product-info">
+                        <h3 class="product-name">Pizza Calabresa</h3>
+                        <p class="product-description">Calabresa fatiada, cebola, mussarela e azeitonas</p>
+                        <div class="product-footer">
+                            <span class="product-price">R$ 45,90</span>
+                            <button class="btn-add-cart" onclick="addToCart(2)">
+                                + Adicionar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1571997478779-2adcbbe9ab2f?w=400&amp;h=300&amp;fit=crop" alt="Pizza Portuguesa" class="product-image">
+                    
+                    <div class="product-info">
+                        <h3 class="product-name">Pizza Portuguesa</h3>
+                        <p class="product-description">Presunto, ovos, cebola, azeitonas e mussarela</p>
+                        <div class="product-footer">
+                            <span class="product-price">R$ 48,90</span>
+                            <button class="btn-add-cart" onclick="addToCart(3)">
+                                + Adicionar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=400&amp;h=300&amp;fit=crop" alt="Pizza Quatro Queijos" class="product-image">
+                    
+                    <div class="product-info">
+                        <h3 class="product-name">Pizza Quatro Queijos</h3>
+                        <p class="product-description">Mussarela, provolone, gorgonzola e parmesão</p>
+                        <div class="product-footer">
+                            <span class="product-price">R$ 52,90</span>
+                            <button class="btn-add-cart" onclick="addToCart(4)">
+                                + Adicionar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&amp;h=300&amp;fit=crop" alt="Hambúrguer Artesanal" class="product-image">
+                    
+                    <div class="product-info">
+                        <h3 class="product-name">Hambúrguer Artesanal</h3>
+                        <p class="product-description">Blend 180g, queijo cheddar, bacon e molho especial</p>
+                        <div class="product-footer">
+                            <span class="product-price">R$ 32,90</span>
+                            <button class="btn-add-cart" onclick="addToCart(5)">
+                                + Adicionar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=400&amp;h=300&amp;fit=crop" alt="Batata Frita Premium" class="product-image">
+                    
+                    <div class="product-info">
+                        <h3 class="product-name">Batata Frita Premium</h3>
+                        <p class="product-description">Batatas rústicas com queijo, bacon e cebola caramelizada</p>
+                        <div class="product-footer">
+                            <span class="product-price">R$ 24,90</span>
+                            <button class="btn-add-cart" onclick="addToCart(6)">
+                                + Adicionar
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -1683,32 +1878,56 @@
         </div>
         
         <div class="cart-items" id="cartItems">
-            <div class="cart-empty">
-                <div class="cart-empty-icon">🛒</div>
-                <p>Seu carrinho está vazio</p>
-            </div>
-        </div>
+                    <div class="cart-item">
+                        <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400&amp;h=300&amp;fit=crop" alt="Pizza Calabresa" class="cart-item-image">
+                        <div class="cart-item-info">
+                            <div class="cart-item-name">Pizza Calabresa</div>
+                            <div class="cart-item-price">R$ 45,90</div>
+                            <div class="cart-item-controls">
+                                <button class="cart-item-btn" onclick="updateQuantity(2, -1)">−</button>
+                                <span class="cart-item-quantity">1</span>
+                                <button class="cart-item-btn" onclick="updateQuantity(2, 1)">+</button>
+                                <button class="cart-item-remove" onclick="removeFromCart(2)">🗑️</button>
+                            </div>
+                        </div>
+                        <div class="cart-item-total">
+                            R$ 45,90
+                        </div>
+                    </div>
+                </div>
         
-        <div class="cart-footer" id="cartFooter" style="display: none;">
+        <div class="cart-footer" id="cartFooter" style="display: block;">
             <!-- FORMULÁRIO DE DADOS DO CLIENTE -->
-            <div id="customerFormContainer"></div>
+            <div id="customerFormContainer">
+                    <div class="saved-customer">
+                        <div class="saved-customer-header">
+                            <div class="saved-customer-title">
+                                ✅ Dados de Entrega
+                            </div>
+                            <button class="btn-edit-customer" onclick="editCustomerData()">Editar</button>
+                        </div>
+                        <div class="saved-customer-info">
+                            <strong>bruno</strong><br>
+                            rua mocandi 165<br>
+                            📱 21999990000
+                        </div>
+                    </div>
+                </div>
 
             <div class="cart-summary">
                 <div class="cart-summary-row">
                     <span>Subtotal:</span>
-                    <span id="cartSubtotal">R$ 0,00</span>
+                    <span id="cartSubtotal">R$ 45,90</span>
                 </div>
             </div>
             
             <div class="cart-total">
                 <span>Total:</span>
-                <span id="cartTotal">R$ 0,00</span>
+                <span id="cartTotal">R$ 45,90</span>
             </div>
             
             <div class="cart-actions">
-                <button class="btn-checkout" id="btnCheckout">
-                    💬 Finalizar no WhatsApp
-                </button>
+                <button class="btn-checkout" id="btnCheckout" style="background: var(--whatsapp);">💬 Finalizar no WhatsApp</button>
                 <button class="btn-clear" id="btnClear">Limpar Carrinho</button>
             </div>
         </div>
@@ -1717,64 +1936,64 @@
     <script>
         // ========== DADOS INICIAIS ==========
         const defaultProducts = [
-            {
-                id: 1,
-                name: 'Pizza Margherita',
-                description: 'Molho de tomate, mussarela, manjericão fresco e azeite',
-                price: 42.90,
-                image: 'https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=400&h=300&fit=crop',
-                available: true
-            },
-            {
-                id: 2,
-                name: 'Pizza Calabresa',
-                description: 'Calabresa fatiada, cebola, mussarela e azeitonas',
-                price: 45.90,
-                image: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400&h=300&fit=crop',
-                available: true
-            },
-            {
-                id: 3,
-                name: 'Pizza Portuguesa',
-                description: 'Presunto, ovos, cebola, azeitonas e mussarela',
-                price: 48.90,
-                image: 'https://images.unsplash.com/photo-1571997478779-2adcbbe9ab2f?w=400&h=300&fit=crop',
-                available: true
-            },
-            {
-                id: 4,
-                name: 'Pizza Quatro Queijos',
-                description: 'Mussarela, provolone, gorgonzola e parmesão',
-                price: 52.90,
-                image: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=400&h=300&fit=crop',
-                available: true
-            },
-            {
-                id: 5,
-                name: 'Hambúrguer Artesanal',
-                description: 'Blend 180g, queijo cheddar, bacon e molho especial',
-                price: 32.90,
-                image: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&h=300&fit=crop',
-                available: true
-            },
-            {
-                id: 6,
-                name: 'Batata Frita Premium',
-                description: 'Batatas rústicas com queijo, bacon e cebola caramelizada',
-                price: 24.90,
-                image: 'https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=400&h=300&fit=crop',
-                available: true
-            }
-        ];
+  {
+    "id": 1,
+    "name": "Pizza Margherita",
+    "description": "Molho de tomate, mussarela, manjericão fresco e azeite",
+    "price": 42.9,
+    "image": "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=400&h=300&fit=crop",
+    "available": true
+  },
+  {
+    "id": 2,
+    "name": "Pizza Calabresa",
+    "description": "Calabresa fatiada, cebola, mussarela e azeitonas",
+    "price": 45.9,
+    "image": "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400&h=300&fit=crop",
+    "available": true
+  },
+  {
+    "id": 3,
+    "name": "Pizza Portuguesa",
+    "description": "Presunto, ovos, cebola, azeitonas e mussarela",
+    "price": 48.9,
+    "image": "https://images.unsplash.com/photo-1571997478779-2adcbbe9ab2f?w=400&h=300&fit=crop",
+    "available": true
+  },
+  {
+    "id": 4,
+    "name": "Pizza Quatro Queijos",
+    "description": "Mussarela, provolone, gorgonzola e parmesão",
+    "price": 52.9,
+    "image": "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=400&h=300&fit=crop",
+    "available": true
+  },
+  {
+    "id": 5,
+    "name": "Hambúrguer Artesanal",
+    "description": "Blend 180g, queijo cheddar, bacon e molho especial",
+    "price": 32.9,
+    "image": "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&h=300&fit=crop",
+    "available": true
+  },
+  {
+    "id": 6,
+    "name": "Batata Frita Premium",
+    "description": "Batatas rústicas com queijo, bacon e cebola caramelizada",
+    "price": 24.9,
+    "image": "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=400&h=300&fit=crop",
+    "available": true
+  }
+];
 
         const defaultSettings = {
-            restaurantName: 'Sabor Express',
-            subtitle: 'Delivery rápido e sabor inigualável! Peça agora e receba em até 30 minutos.',
-            whatsappNumber: '5521999999999',
-            logoUrl: '',
-            adminPassword: 'admin123',
-            isOpen: true
-        };
+  "restaurantName": "Kaoana Pizzas",
+  "subtitle": "Delivery rápido e sabor inigualável! Peça agora e receba em até 30 minutos.",
+  "whatsappNumber": "5521999999999",
+  "logoUrl": "",
+  "isOpen": true,
+  "adminPassword": "admin123"
+};
 
         // ========== VARIÁVEIS GLOBAIS ==========
         let products = [];
@@ -2401,13 +2620,69 @@ function exportUpdatedHTML() {
     scripts.forEach(script => {
         if (script.innerHTML.includes('const defaultProducts')) {
             script.innerHTML = script.innerHTML.replace(
-                /const defaultProducts = [\s\S]*?];/,
+                /const defaultProducts = [
+  {
+    "id": 1,
+    "name": "Pizza Margherita",
+    "description": "Molho de tomate, mussarela, manjericão fresco e azeite",
+    "price": 42.9,
+    "image": "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=400&h=300&fit=crop",
+    "available": true
+  },
+  {
+    "id": 2,
+    "name": "Pizza Calabresa",
+    "description": "Calabresa fatiada, cebola, mussarela e azeitonas",
+    "price": 45.9,
+    "image": "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400&h=300&fit=crop",
+    "available": true
+  },
+  {
+    "id": 3,
+    "name": "Pizza Portuguesa",
+    "description": "Presunto, ovos, cebola, azeitonas e mussarela",
+    "price": 48.9,
+    "image": "https://images.unsplash.com/photo-1571997478779-2adcbbe9ab2f?w=400&h=300&fit=crop",
+    "available": true
+  },
+  {
+    "id": 4,
+    "name": "Pizza Quatro Queijos",
+    "description": "Mussarela, provolone, gorgonzola e parmesão",
+    "price": 52.9,
+    "image": "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=400&h=300&fit=crop",
+    "available": true
+  },
+  {
+    "id": 5,
+    "name": "Hambúrguer Artesanal",
+    "description": "Blend 180g, queijo cheddar, bacon e molho especial",
+    "price": 32.9,
+    "image": "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&h=300&fit=crop",
+    "available": true
+  },
+  {
+    "id": 6,
+    "name": "Batata Frita Premium",
+    "description": "Batatas rústicas com queijo, bacon e cebola caramelizada",
+    "price": 24.9,
+    "image": "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=400&h=300&fit=crop",
+    "available": true
+  }
+];/,
                 `const defaultProducts = ${JSON.stringify(products, null, 2)};`
             );
         }
         if (script.innerHTML.includes('const defaultSettings')) {
             script.innerHTML = script.innerHTML.replace(
-                /const defaultSettings = [\s\S]*?};/,
+                /const defaultSettings = {
+  "restaurantName": "Kaoana Pizzas",
+  "subtitle": "Delivery rápido e sabor inigualável! Peça agora e receba em até 30 minutos.",
+  "whatsappNumber": "5521999999999",
+  "logoUrl": "",
+  "isOpen": true,
+  "adminPassword": "admin123"
+};/,
                 `const defaultSettings = ${JSON.stringify(settings, null, 2)};`
             );
         }
@@ -2434,5 +2709,5 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 
-</body>
-</html>
+
+<div class="alert alert-success" style="position: fixed; top: 100px; right: 20px; z-index: 9999; min-width: 300px; animation: 0.5s ease 0s 1 normal none running fadeInUp;"><strong>✓</strong> Configurações salvas com sucesso!</div></body></html>
