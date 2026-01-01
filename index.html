@@ -1322,6 +1322,76 @@
             display: block;
         }
 
+        /* ========== RODAPÉ ========== */
+        .footer {
+            background: var(--gray-900);
+            color: var(--white);
+            padding: 2rem;
+            text-align: center;
+            font-size: 0.875rem;
+        }
+
+        .footer a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .footer a:hover {
+            color: var(--secondary);
+        }
+
+        /* ========== CAMPOS DE HORÁRIO ========== */
+        .schedule-grid {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .schedule-day {
+            background: var(--gray-50);
+            padding: 1rem;
+            border-radius: 8px;
+            display: grid;
+            grid-template-columns: auto 1fr 1fr;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .schedule-day-name {
+            font-weight: 600;
+            color: var(--gray-800);
+            min-width: 100px;
+        }
+
+        .schedule-inputs {
+            display: contents;
+        }
+
+        .schedule-time-input {
+            padding: 0.5rem;
+            border: 2px solid var(--gray-200);
+            border-radius: 6px;
+            font-size: 0.875rem;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .schedule-time-input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .schedule-time-input:disabled {
+            background: var(--gray-100);
+            cursor: not-allowed;
+        }
+
+        .schedule-checkbox {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
         .btn-clear {
             width: 100%;
             padding: 0.875rem;
@@ -1527,12 +1597,9 @@
                 </div>
                 
                 <div class="form-group">
-                    <div class="form-switch">
-                        <label class="switch">
-                            <input type="checkbox" id="storeStatus" checked>
-                            <span class="slider"></span>
-                        </label>
-                        <span class="switch-label">Loja Aberta</span>
+                    <label class="form-label">Horários de Funcionamento</label>
+                    <div class="schedule-grid" id="scheduleGrid">
+                        <!-- Horários serão inseridos aqui -->
                     </div>
                 </div>
                 
@@ -1543,6 +1610,11 @@
             <div class="admin-section">
                 <h3 class="admin-section-title">🍕 Gerenciar Produtos</h3>
                 
+                <div class="form-group">
+                    <label class="form-label">Taxa de Entrega (R$)</label>
+                    <input type="number" class="form-input" id="deliveryFee" step="0.01" min="0" placeholder="6.00">
+                </div>
+                
                 <div class="alert alert-info">
                     <strong>💡 Dica:</strong> Clique em "Adicionar Produto" para criar novos itens. Use os botões de ação para editar, desabilitar ou excluir produtos.
                 </div>
@@ -1552,6 +1624,19 @@
                 <div class="product-admin-list" id="productAdminList">
                     <!-- Produtos serão listados aqui -->
                 </div>
+            </div>
+
+            <!-- EXPORTAR HTML -->
+            <div class="admin-section">
+                <h3 class="admin-section-title">📥 Exportar Site</h3>
+                
+                <div class="alert alert-success">
+                    <strong>✅ Exportação:</strong> Baixe o arquivo HTML completo com todas as suas alterações (produtos, configurações, etc). Você pode hospedar este arquivo em qualquer servidor.
+                </div>
+                
+                <button class="btn-admin btn-success" id="exportHtmlBtn" style="width: 100%;">
+                    📥 Baixar HTML Atualizado
+                </button>
             </div>
         </div>
     </aside>
@@ -1666,6 +1751,11 @@
         </div>
     </section>
 
+    <!-- RODAPÉ -->
+    <footer class="footer">
+        <p>Desenvolvido por <a href="https://instagram.com/obrunofast" target="_blank">@obrunofast</a></p>
+    </footer>
+
     <!-- CARRINHO SIDEBAR -->
     <div class="cart-overlay" id="cartOverlay"></div>
     <aside class="cart-sidebar" id="cartSidebar">
@@ -1689,6 +1779,10 @@
                 <div class="cart-summary-row">
                     <span>Subtotal:</span>
                     <span id="cartSubtotal">R$ 0,00</span>
+                </div>
+                <div class="cart-summary-row">
+                    <span>Taxa de Entrega:</span>
+                    <span id="cartDeliveryFee">R$ 0,00</span>
                 </div>
             </div>
             
@@ -1765,7 +1859,16 @@
             whatsappNumber: '5521999999999',
             logoUrl: '',
             adminPassword: 'admin123',
-            isOpen: true
+            deliveryFee: 6.00,
+            schedule: {
+                monday: { enabled: true, open: '09:00', close: '22:00' },
+                tuesday: { enabled: true, open: '09:00', close: '22:00' },
+                wednesday: { enabled: true, open: '09:00', close: '22:00' },
+                thursday: { enabled: true, open: '09:00', close: '22:00' },
+                friday: { enabled: true, open: '09:00', close: '22:00' },
+                saturday: { enabled: true, open: '09:00', close: '23:00' },
+                sunday: { enabled: true, open: '09:00', close: '22:00' }
+            }
         };
 
         // ========== VARIÁVEIS GLOBAIS ==========
@@ -1788,6 +1891,9 @@
         const passwordError = document.getElementById('passwordError');
         const passwordCancel = document.getElementById('passwordCancel');
         
+        const exportHtmlBtn = document.getElementById('exportHtmlBtn');
+        const scheduleGrid = document.getElementById('scheduleGrid');
+        
         const productModal = document.getElementById('productModal');
         const productForm = document.getElementById('productForm');
         const modalClose = document.getElementById('modalClose');
@@ -1805,6 +1911,7 @@
         const cartFooter = document.getElementById('cartFooter');
         const cartSubtotal = document.getElementById('cartSubtotal');
         const cartTotal = document.getElementById('cartTotal');
+        const cartDeliveryFee = document.getElementById('cartDeliveryFee');
         const btnCheckout = document.getElementById('btnCheckout');
         const btnClear = document.getElementById('btnClear');
         const customerFormContainer = document.getElementById('customerFormContainer');
@@ -1854,7 +1961,48 @@
             document.getElementById('restaurantSubtitle').value = settings.subtitle;
             document.getElementById('whatsappNumber').value = settings.whatsappNumber;
             document.getElementById('adminPassword').value = settings.adminPassword || 'admin123';
-            document.getElementById('storeStatus').checked = settings.isOpen;
+            document.getElementById('deliveryFee').value = settings.deliveryFee || 6.00;
+            
+            // Renderizar horários
+            renderSchedule();
+        }
+
+        function renderSchedule() {
+            const days = {
+                monday: 'Segunda-feira',
+                tuesday: 'Terça-feira',
+                wednesday: 'Quarta-feira',
+                thursday: 'Quinta-feira',
+                friday: 'Sexta-feira',
+                saturday: 'Sábado',
+                sunday: 'Domingo'
+            };
+
+            scheduleGrid.innerHTML = Object.keys(days).map(day => {
+                const schedule = settings.schedule?.[day] || { enabled: true, open: '09:00', close: '22:00' };
+                return `
+                    <div class="schedule-day">
+                        <div class="schedule-day-name">
+                            <input type="checkbox" class="schedule-checkbox" id="schedule-${day}-enabled" ${schedule.enabled ? 'checked' : ''}>
+                            <label for="schedule-${day}-enabled" style="margin-left: 0.5rem; cursor: pointer;">${days[day]}</label>
+                        </div>
+                        <input type="time" class="schedule-time-input" id="schedule-${day}-open" value="${schedule.open}" ${!schedule.enabled ? 'disabled' : ''}>
+                        <input type="time" class="schedule-time-input" id="schedule-${day}-close" value="${schedule.close}" ${!schedule.enabled ? 'disabled' : ''}>
+                    </div>
+                `;
+            }).join('');
+
+            // Adicionar listeners para habilitar/desabilitar inputs
+            Object.keys(days).forEach(day => {
+                const checkbox = document.getElementById(`schedule-${day}-enabled`);
+                const openInput = document.getElementById(`schedule-${day}-open`);
+                const closeInput = document.getElementById(`schedule-${day}-close`);
+                
+                checkbox.addEventListener('change', () => {
+                    openInput.disabled = !checkbox.checked;
+                    closeInput.disabled = !checkbox.checked;
+                });
+            });
         }
 
         function updateSiteSettings() {
@@ -1873,17 +2021,8 @@
                 logoIcon.style.background = 'linear-gradient(135deg, var(--primary), var(--secondary))';
             }
             
-            // Atualizar status
-            const statusBadge = document.getElementById('statusBadge');
-            const statusText = document.getElementById('statusText');
-            
-            if (settings.isOpen) {
-                statusBadge.className = 'status-badge status-open';
-                statusText.textContent = 'Aberto Agora';
-            } else {
-                statusBadge.className = 'status-badge status-closed';
-                statusText.textContent = 'Fechado';
-            }
+            // Atualizar status (verificar horário atual)
+            updateStoreStatus();
             
             // Atualizar WhatsApp
             const whatsappUrl = `https://wa.me/${settings.whatsappNumber}`;
@@ -1899,6 +2038,36 @@
                     <p>${featuredProduct.description}</p>
                     <div class="hero-card-price">R$ ${featuredProduct.price.toFixed(2).replace('.', ',')}</div>
                 `;
+            }
+        }
+
+        function updateStoreStatus() {
+            const now = new Date();
+            const dayNames = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+            const currentDay = dayNames[now.getDay()];
+            const currentTime = now.getHours() * 60 + now.getMinutes(); // minutos desde meia-noite
+
+            const todaySchedule = settings.schedule?.[currentDay];
+            
+            let isOpen = false;
+            if (todaySchedule && todaySchedule.enabled) {
+                const [openHour, openMin] = todaySchedule.open.split(':').map(Number);
+                const [closeHour, closeMin] = todaySchedule.close.split(':').map(Number);
+                const openTime = openHour * 60 + openMin;
+                const closeTime = closeHour * 60 + closeMin;
+                
+                isOpen = currentTime >= openTime && currentTime <= closeTime;
+            }
+
+            const statusBadge = document.getElementById('statusBadge');
+            const statusText = document.getElementById('statusText');
+            
+            if (isOpen) {
+                statusBadge.className = 'status-badge status-open';
+                statusText.textContent = 'Aberto Agora';
+            } else {
+                statusBadge.className = 'status-badge status-closed';
+                statusText.textContent = 'Fechado';
             }
         }
 
@@ -2038,7 +2207,18 @@
             settings.subtitle = document.getElementById('restaurantSubtitle').value;
             settings.whatsappNumber = document.getElementById('whatsappNumber').value;
             settings.adminPassword = document.getElementById('adminPassword').value || 'admin123';
-            settings.isOpen = document.getElementById('storeStatus').checked;
+            settings.deliveryFee = parseFloat(document.getElementById('deliveryFee').value) || 6.00;
+            
+            // Salvar horários
+            const days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
+            settings.schedule = {};
+            days.forEach(day => {
+                settings.schedule[day] = {
+                    enabled: document.getElementById(`schedule-${day}-enabled`).checked,
+                    open: document.getElementById(`schedule-${day}-open`).value,
+                    close: document.getElementById(`schedule-${day}-close`).value
+                };
+            });
             
             saveData();
             updateSiteSettings();
@@ -2155,8 +2335,10 @@
                 renderCustomerForm();
             }
 
+            const deliveryFee = settings.deliveryFee || 0;
             cartSubtotal.textContent = `R$ ${subtotal.toFixed(2).replace('.', ',')}`;
-            cartTotal.textContent = `R$ ${subtotal.toFixed(2).replace('.', ',')}`;
+            cartDeliveryFee.textContent = `R$ ${deliveryFee.toFixed(2).replace('.', ',')}`;
+            cartTotal.textContent = `R$ ${(subtotal + deliveryFee).toFixed(2).replace('.', ',')}`;
             
             // Habilitar/desabilitar botão de checkout
             updateCheckoutButton();
@@ -2266,6 +2448,10 @@
                 return;
             }
 
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const deliveryFee = settings.deliveryFee || 0;
+            const total = subtotal + deliveryFee;
+
             let message = `*🍕 Novo Pedido - ${settings.restaurantName}*\n\n`;
             
             // Dados do cliente
@@ -2282,7 +2468,8 @@
                 message += `Subtotal: R$ ${(item.price * item.quantity).toFixed(2).replace('.', ',')}\n\n`;
             });
 
-            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            message += `Subtotal: R$ ${subtotal.toFixed(2).replace('.', ',')}\n`;
+            message += `Taxa de Entrega: R$ ${deliveryFee.toFixed(2).replace('.', ',')}\n`;
             message += `*💰 TOTAL: R$ ${total.toFixed(2).replace('.', ',')}*\n\n`;
             message += 'Aguardo confirmação! 😊';
 
@@ -2367,6 +2554,12 @@
             
             btnCheckout.addEventListener('click', checkout);
             btnClear.addEventListener('click', clearCart);
+            
+            // Exportar HTML
+            exportHtmlBtn.addEventListener('click', exportHTML);
+            
+            // Atualizar status a cada minuto
+            setInterval(updateStoreStatus, 60000);
         }
 
         function closeAdminPanel() {
@@ -2377,6 +2570,49 @@
         function closeCart() {
             cartSidebar.classList.remove('active');
             cartOverlay.classList.remove('active');
+        }
+
+        // ========== EXPORTAR HTML ==========
+        function exportHTML() {
+            // Obter o HTML atual
+            const htmlContent = `<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${settings.restaurantName} - Delivery</title>
+    ${document.head.innerHTML}
+</head>
+<body>
+    ${document.body.innerHTML}
+    <script>
+        // Dados pré-configurados
+        const preloadedProducts = ${JSON.stringify(products)};
+        const preloadedSettings = ${JSON.stringify(settings)};
+        
+        // Sobrescrever localStorage com dados exportados
+        if (!localStorage.getItem('products')) {
+            localStorage.setItem('products', JSON.stringify(preloadedProducts));
+        }
+        if (!localStorage.getItem('settings')) {
+            localStorage.setItem('settings', JSON.stringify(preloadedSettings));
+        }
+    <\/script>
+</body>
+</html>`;
+
+            // Criar blob e fazer download
+            const blob = new Blob([htmlContent], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${settings.restaurantName.toLowerCase().replace(/\s+/g, '-')}-delivery.html`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            showNotification('HTML exportado com sucesso! ✅', 'success');
         }
 
         // ========== INICIAR APLICAÇÃO ==========
